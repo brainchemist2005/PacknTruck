@@ -14,11 +14,16 @@ using namespace std;
 // Représente un entrepot
 class Entrepot{
   public:
-    
-    // Interface publique ici.
+    // Interface publique ici
+    Entrepot(double x=0, double y=0, int numberBoxes=0);
+    Entrepot(const Entrepot&);
+    ~Entrepot();
     
   private:
     // Représentation ici.
+    double x;
+    double y;
+    int numberBoxes;
     
   friend ostream& operator << (ostream& os, const Entrepot& entrepot);
   friend istream& operator >> (istream& is, Entrepot& entrepot);

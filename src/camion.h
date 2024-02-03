@@ -13,11 +13,20 @@ using namespace std;
 // Représente un camion
 class Camion{
   public:
+    Camion(double x=0, double y=0, int capacity=0, int numberBoxesIn=0);
+    Camion(const Camion&);
+    ~Camion();
+
 
     // Interface publique ici.
+    void truckPosition() const;
+
 
   private:
-    // Représentation ici.
+    double x;
+    double y;
+    int capacity;
+    int numberBoxesIn;
 
   friend ostream& operator << (ostream& os, const Camion& camion);
   friend istream& operator >> (istream& is, Camion& camion);

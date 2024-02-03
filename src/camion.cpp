@@ -6,14 +6,15 @@
 
 ostream& operator << (ostream& os, const Camion& camion)
 {
-	// À compléter
+	os << "Truck position: (" << camion.x << camion.y << ")";
 
     return os;
 }
 
 istream& operator >> (istream& is, Camion& camion)
 {
-    // À compléter
+
+    is >> camion.capacity;
 
     return is;
 }
