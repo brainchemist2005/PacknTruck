@@ -4,6 +4,10 @@
 
 #include "camion.h"
 
+Camion::Camion(float _x, float _y, int _param1, int _param2): x(_x),y(_y)  {
+
+}
+
 ostream& operator << (ostream& os, const Camion& camion)
 {
 	os << "Truck position: (" << camion.x << camion.y << ")";
@@ -13,8 +17,10 @@ ostream& operator << (ostream& os, const Camion& camion)
 
 istream& operator >> (istream& is, Camion& camion)
 {
+    char redundant;
 
     is >> camion.capacity;
+    is >> redundant;
 
     return is;
 }

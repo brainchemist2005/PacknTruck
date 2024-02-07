@@ -15,16 +15,15 @@ using namespace std;
 class Entrepot{
   public:
     // Interface publique ici
-    Entrepot(double x=0, double y=0, int numberBoxes=0);
+    Entrepot(float x=0, float y=0, int numberBoxes=0);
     Entrepot(const Entrepot&);
-    ~Entrepot();
-    
-  private:
-    // Représentation ici.
-    double x;
-    double y;
+
     int numberBoxes;
-    
+
+private:
+    // Représentation ici.
+    float x,y;
+
   friend ostream& operator << (ostream& os, const Entrepot& entrepot);
   friend istream& operator >> (istream& is, Entrepot& entrepot);
 };

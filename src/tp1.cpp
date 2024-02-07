@@ -48,6 +48,6 @@ int tp1(istream& camion_entrepot){
     camion_entrepot >> entrepot;
     // À compléter
 
-    
+    cout << camion << endl << entrepot << endl;
     return 0;
 }

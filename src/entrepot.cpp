@@ -6,28 +6,35 @@
 
 ostream& operator << (ostream& os, const Entrepot& entrepot)
 {
-	os << "Number of boxes: " << entrepot.numberBoxes << "Position: (" << entrepot.x << "," << entrepot.y <<")";
+	os << "Number of boxes: " << entrepot.numberBoxes << " Position: (" << entrepot.x << "," << entrepot.y <<")";
     return os;
 }
 
 istream& operator >> (istream& is, Entrepot& entrepot)
 {
-    char comma, redundant, op, cp;
 
+    char comma, op, cp, space;
+
+    is >> space;
+
+    // Read number of boxes
     is >> entrepot.numberBoxes;
 
-    if(is)
-    {
-        is >> redundant >> op >> entrepot.x >> comma >> entrepot.y >> cp;
-        assert(cp == ')');
-        assert(op == '(');
-        assert(comma == ',');
-    }
+    // Read opening parenthesis
+    is >> op;
+    assert(op == '(');
+
+    // Read coordinates
+    is >> entrepot.x >> comma >> entrepot.y;
+
+    // Read closing parenthesis
+    is >> cp;
+    assert(cp == ')');
 
     return is;
 }
 
-Entrepot::Entrepot(double _x, double _y, int _numberBoxes) : x(_x), y(_y), numberBoxes(_numberBoxes){
+Entrepot::Entrepot(float _x, float _y, int _numberBoxes) : numberBoxes(_numberBoxes), x(_x), y(_y){
 
 }
 
