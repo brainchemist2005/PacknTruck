@@ -18,10 +18,8 @@ istream& operator>>(istream& is, Tableau<Entrepot>& entrepots)
 
     is >> space;
 
-    while (is >> entrepot.numberBoxes >> op >> entrepot.x >> comma >> space >> entrepot.y >> cp)
+    while (is >> entrepot.numberBoxes >> op >> entrepot.x >> comma >> entrepot.y >> cp)
     {
-        if(space == '-')
-            entrepot.y = -entrepot.y;
 
         entrepots.ajouter(entrepot);
 
