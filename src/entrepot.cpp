@@ -10,29 +10,37 @@ ostream& operator << (ostream& os, const Entrepot& entrepot)
     return os;
 }
 
-istream& operator >> (istream& is, Entrepot& entrepot)
-{
 
+istream& operator>>(istream& is, Tableau<Entrepot>& entrepots)
+{
+    Entrepot entrepot;
     char comma, op, cp, space;
 
     is >> space;
 
-    // Read number of boxes
-    is >> entrepot.numberBoxes;
+    while (is >> entrepot.numberBoxes >> op >> entrepot.x >> comma >> space >> entrepot.y >> cp)
+    {
+        entrepots.ajouter(entrepot);
 
-    // Read opening parenthesis
-    is >> op;
-    assert(op == '(');
+        Entrepot entrepot(entrepot.x, entrepot.y, entrepot.numberBoxes);
 
-    // Read coordinates
-    is >> entrepot.x >> comma >> entrepot.y;
 
-    // Read closing parenthesis
-    is >> cp;
-    assert(cp == ')');
+        assert(op == '(');
+        assert(comma == ',');
+        assert(cp == ')');
+    }
+
+    // Print the information after adding the entrepots
+    std::cout << "Number of warehouses: " << entrepots.taille() << std::endl;
+    for (int i = 0; i < entrepots.taille(); ++i)
+    {
+        std::cout << "Warehouse ID: " << i << ", Coordinates: ("
+                  << entrepots[i].getLatitude() << ", " << entrepots[i].getLongitude() << "), Number of boxes: " << entrepots[i].numberBoxes << std::endl;
+    }
 
     return is;
 }
+
 
 Entrepot::Entrepot(float _x, float _y, int _numberBoxes) : numberBoxes(_numberBoxes), x(_x), y(_y){
 

@@ -21,6 +21,8 @@ int tp1(std::istream& entree);
 
 int main(int argc, const char** argv)
 {
+    Tableau<Entrepot> entrepots;
+
     if(argc == 1){
     	// Pas d'argument entrepot ==> lecture depuis l'entrée standard avec std::cin.
     	return tp1(std::cin);
@@ -42,12 +44,19 @@ int main(int argc, const char** argv)
 }
 
 int tp1(istream& camion_entrepot){
+    Tableau<Entrepot> entrepots;
 	Camion camion;
 	camion_entrepot >> camion;
 	Entrepot entrepot;
-    camion_entrepot >> entrepot;
-    // À compléter
+    camion_entrepot >> entrepots;
 
-    cout << camion << endl << entrepot << endl;
+
+    /*std::cout << "Number of warehouses: " << entrepots.taille() << std::endl;
+    for (int i = 0; i < entrepots.taille(); ++i) {
+        std::cout << "Warehouse ID: " << i << ", Coordinates: ("
+                  << entrepots[i].getLatitude() << ", " << entrepots[i].getLongitude() << ")Number of boxes: " << entrepots[i].numberBoxes << std::endl;
+    }*/
+
+    //cout << camion << endl << entrepot << endl;
     return 0;
 }

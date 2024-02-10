@@ -54,7 +54,7 @@ class Tableau{
 
 
 template <class T>
-Tableau<T>::Tableau(int capacite_) : capacite(capacite_), nbElements(0)
+Tableau<T>::Tableau(int capacite_) : nbElements(0), capacite(capacite_)
 {
     elements = new T[capacite_];
 }
@@ -93,8 +93,6 @@ void Tableau<T>::ajouter(const T& item)
         delete[] elements;
         elements = newElements;
     }
-
-
 
     elements[nbElements++] = item;
 }
@@ -135,6 +133,7 @@ void Tableau<T>::vider()
 template <class T>
 const T& Tableau<T>::operator[] (int index) const
 {
+    std::cout << index << " " << nbElements << std::endl;
     assert(index > 0 && index < nbElements);
     return elements[index];
 }
@@ -142,7 +141,9 @@ const T& Tableau<T>::operator[] (int index) const
 template <class T>
 T& Tableau<T>::operator[] (int index)
 {
-    assert(index > 0 && index < nbElements);
+    //std::cout << index << " " << nbElements << std::endl;
+
+    assert(index >= 0 && index < nbElements);
     return elements[index];
 }
 
@@ -167,7 +168,7 @@ Tableau<T>& Tableau<T>::operator = (const Tableau<T>& autre)
 template <class T>
 bool Tableau<T>::operator == (const Tableau<T>& autre) const
 {
-    if(elements != autre)
+    if(this != &autre)
         return false;
 
     for(int i=0 ; i<nbElements ; i++)
