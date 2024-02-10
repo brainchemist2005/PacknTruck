@@ -49,14 +49,14 @@ int tp1(istream& camion_entrepot){
 	camion_entrepot >> camion;
 	Entrepot entrepot;
     camion_entrepot >> entrepots;
+    camion.truckPosition(entrepots,camion);
 
+    std::cout << camion << std::endl;
+    for (int i = 0; i < entrepots.taille(); ++i)
+    {
+        std::cout << "Distance:" << i << "\t\tNumber of boxes: " << entrepots[i].numberBoxes << "\t\tPosition: ("
+                  << entrepots[i].getLatitude() << ", " << entrepots[i].getLongitude() << ")" << std::endl;
+    }
 
-    /*std::cout << "Number of warehouses: " << entrepots.taille() << std::endl;
-    for (int i = 0; i < entrepots.taille(); ++i) {
-        std::cout << "Warehouse ID: " << i << ", Coordinates: ("
-                  << entrepots[i].getLatitude() << ", " << entrepots[i].getLongitude() << ")Number of boxes: " << entrepots[i].numberBoxes << std::endl;
-    }*/
-
-    //cout << camion << endl << entrepot << endl;
     return 0;
 }

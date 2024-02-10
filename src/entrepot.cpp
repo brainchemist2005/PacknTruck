@@ -20,30 +20,26 @@ istream& operator>>(istream& is, Tableau<Entrepot>& entrepots)
 
     while (is >> entrepot.numberBoxes >> op >> entrepot.x >> comma >> entrepot.y >> cp)
     {
-
+        entrepot.id++;
         entrepots.ajouter(entrepot);
 
-        Entrepot entrepot(entrepot.x, entrepot.y, entrepot.numberBoxes);
-
+        Entrepot entrepot;
 
         assert(op == '(');
         assert(comma == ',');
         assert(cp == ')');
     }
 
-    // Print the information after adding the entrepots
-    std::cout << "Number of warehouses: " << entrepots.taille() << std::endl;
-    for (int i = 0; i < entrepots.taille(); ++i)
-    {
-        std::cout << "Warehouse ID: " << i << ", Coordinates: ("
-                  << entrepots[i].getLatitude() << ", " << entrepots[i].getLongitude() << "), Number of boxes: " << entrepots[i].numberBoxes << std::endl;
-    }
-
     return is;
 }
 
+int nearestWarehouse()
+{
 
-Entrepot::Entrepot(float _x, float _y, int _numberBoxes) : numberBoxes(_numberBoxes), x(_x), y(_y){
+}
+
+
+Entrepot::Entrepot(float _x, float _y, int _numberBoxes, int _id) : numberBoxes(_numberBoxes), x(_x), y(_y), id(_id){
 
 }
 
