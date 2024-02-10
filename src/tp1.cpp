@@ -50,12 +50,21 @@ int tp1(istream& camion_entrepot){
 	Entrepot entrepot;
     camion_entrepot >> entrepots;
     camion.truckPosition(entrepots,camion);
+    Position position(camion.getLongitude(), camion.getLatitude());
+    Position position1(entrepots[2].longitude, entrepots[0].latitude);
+
+    cout << position << " " << position1 << endl;
+
+    double result;
+    result = position.distance(position1);
+
+    std::cout << "result: " << result << endl;
 
     std::cout << camion << std::endl;
     for (int i = 0; i < entrepots.taille(); ++i)
     {
         std::cout << "Distance:" << i << "\t\tNumber of boxes: " << entrepots[i].numberBoxes << "\t\tPosition: ("
-                  << entrepots[i].getLatitude() << ", " << entrepots[i].getLongitude() << ")" << std::endl;
+                  << entrepots[i].getLongitude() << ", " << entrepots[i].getLatitude() << ")" << std::endl;
     }
 
     return 0;

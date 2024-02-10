@@ -4,14 +4,14 @@
 
 #include "camion.h"
 
-Camion::Camion(float _x, float _y, int _param1, int _param2): x(_x),y(_y)  {
+Camion::Camion(float _x, float _y, int _param1, int _param2): longitude(_x), latitude(_y)  {
 
 }
 
 ostream& operator << (ostream& os, const Camion& camion)
 {
     char vir= ',';
-	os << "Truck position: (" << camion.x << vir << camion.y << ")";
+	os << "Truck position: (" << camion.longitude << vir << camion.latitude << ")";
 
     return os;
 }
@@ -23,15 +23,15 @@ void Camion::truckPosition(Tableau<Entrepot>& entrepots,Camion& camion)
 
     for(int i=1 ; i< entrepots.taille(); i++)
     {
-        if(entrepots[i].numberBoxes > numberofbox) {
+        if(entrepots[i].numberBoxes > numberofbox)
+        {
             numberofbox = entrepots[i].numberBoxes;
             max = i;
         }
     }
 
-    camion.x = entrepots[max].x;
-    camion.y = entrepots[max].y;
-
+    camion.longitude = entrepots[max].longitude;
+    camion.latitude = entrepots[max].latitude;
 }
 
 istream& operator >> (istream& is, Camion& camion)
@@ -43,6 +43,3 @@ istream& operator >> (istream& is, Camion& camion)
 
     return is;
 }
-
-//4:30 4:40
-//right autouroute lour park ouest

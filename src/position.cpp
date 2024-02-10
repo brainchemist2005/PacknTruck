@@ -28,9 +28,9 @@ double Position::distance(const Position& position) const {
 
 std::ostream& operator << (std::ostream& os, const Position& position) {
   os << "(" 
-     << (position.latitude * 180.0 / PI)
+     << (position.latitude )//* 180.0 / PI)
      << "," 
-     << (position.longitude * 180.0 / PI)
+     << (position.longitude )//* 180.0 / PI)
      << ")";
   return os;
 }

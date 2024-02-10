@@ -6,7 +6,7 @@
 
 ostream& operator << (ostream& os, const Entrepot& entrepot)
 {
-	os << "Number of boxes: " << entrepot.numberBoxes << " Position: (" << entrepot.x << "," << entrepot.y <<")";
+	os << "Number of boxes: " << entrepot.numberBoxes << " Position: (" << entrepot.longitude << "," << entrepot.latitude << ")";
     return os;
 }
 
@@ -18,7 +18,7 @@ istream& operator>>(istream& is, Tableau<Entrepot>& entrepots)
 
     is >> space;
 
-    while (is >> entrepot.numberBoxes >> op >> entrepot.x >> comma >> entrepot.y >> cp)
+    while (is >> entrepot.numberBoxes >> op >> entrepot.longitude >> comma >> entrepot.latitude >> cp)
     {
         entrepot.id++;
         entrepots.ajouter(entrepot);
@@ -33,13 +33,7 @@ istream& operator>>(istream& is, Tableau<Entrepot>& entrepots)
     return is;
 }
 
-int nearestWarehouse()
-{
-
-}
-
-
-Entrepot::Entrepot(float _x, float _y, int _numberBoxes, int _id) : numberBoxes(_numberBoxes), x(_x), y(_y), id(_id){
+Entrepot::Entrepot(float _x, float _y, int _numberBoxes, int _id) : numberBoxes(_numberBoxes), longitude(_x), latitude(_y), id(_id){
 
 }
 
