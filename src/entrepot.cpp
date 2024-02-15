@@ -37,3 +37,5 @@ Entrepot::Entrepot(float _x, float _y, int _numberBoxes, int _id) : numberBoxes(
 
 }
 
+Entrepot::Entrepot(const Entrepot& other) : numberBoxes(other.numberBoxes), id(other.id), distance(other.distance), longitude(other.longitude), latitude(other.latitude) {
+}

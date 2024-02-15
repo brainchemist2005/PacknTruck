@@ -10,6 +10,7 @@
 #define _TABLEAU___H_
 
 #include <assert.h>
+#include <functional>
 
 template <class T>
 class Tableau{
@@ -74,6 +75,9 @@ Tableau<T>::~Tableau()
 	delete[] elements;
 }
 
+
+
+
 template <class T>
 int Tableau<T>::taille() const
 {
@@ -118,11 +122,14 @@ void Tableau<T>::enlever(int index)
 template <class T>
 int Tableau<T>::chercher(const T& element)
 {
-	// À compléter
-    // Voir la fonction Tableau<T>::contient() dans les notes de cours à la page 47.
-    // Il suffit de l'adapter pour retourner la position au lieu d'un booléen.
+    for (int i = 0; i < nbElements; i++) {
+        if (elements[i] == element) {
+            return i;
+        }
+    }
     return -1;
 }
+
 
 template <class T>
 void Tableau<T>::vider()
@@ -141,8 +148,6 @@ const T& Tableau<T>::operator[] (int index) const
 template <class T>
 T& Tableau<T>::operator[] (int index)
 {
-    //std::cout << index << " " << nbElements << std::endl;
-
     assert(index >= 0 && index < nbElements);
     return elements[index];
 }

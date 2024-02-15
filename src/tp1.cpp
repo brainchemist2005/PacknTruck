@@ -19,6 +19,18 @@ int tp1(std::istream& entree);
 // exemple: ./tp1 entrepot.txt
 // argv[0]="./tp1"; argv[1]="entrepot.txt"
 
+Position referencePosition;
+
+bool compareEntrepotDistance(const Entrepot& e1, const Entrepot& e2) {
+    Position pos1(e1.latitude, e1.longitude);
+    Position pos2(e2.latitude, e2.longitude);
+
+    double distance1 = pos1.distance(referencePosition);
+    double distance2 = pos2.distance(referencePosition);
+
+    return distance1 < distance2;
+}
+
 int main(int argc, const char** argv)
 {
     Tableau<Entrepot> entrepots;
@@ -51,20 +63,26 @@ int tp1(istream& camion_entrepot){
     camion_entrepot >> entrepots;
     camion.truckPosition(entrepots,camion);
     Position position(camion.getLongitude(), camion.getLatitude());
-    Position position1(entrepots[2].longitude, entrepots[0].latitude);
-
-    cout << position << " " << position1 << endl;
 
     double result;
-    result = position.distance(position1);
-
-    std::cout << "result: " << result << endl;
 
     std::cout << camion << std::endl;
-    for (int i = 0; i < entrepots.taille(); ++i)
-    {
-        std::cout << "Distance:" << i << "\t\tNumber of boxes: " << entrepots[i].numberBoxes << "\t\tPosition: ("
-                  << entrepots[i].getLongitude() << ", " << entrepots[i].getLatitude() << ")" << std::endl;
+    for (int i = 0; i < entrepots.taille(); ++i) {
+        Position position1(entrepots[i].longitude, entrepots[i].latitude);
+
+        result = position.distance(position1);
+
+        entrepots[i].distance = result;
+
+    }
+
+    entrepot.quickSort(entrepots, 0, entrepots.taille()-1);
+
+    int pickedUp = entrepot.pickUpEntrepot(entrepots,camion.getCapacity());
+
+    for (int i = 0; i <= pickedUp; ++i) {
+        std::cout << "Distance:" << entrepots[i].distance << "\t\tNumber of boxes: " << entrepots[i].numberBoxes << "\t\tPosition: ("
+                   << entrepots[i].getLongitude() << ", " << entrepots[i].getLatitude() << ")" << std::endl;
     }
 
     return 0;
