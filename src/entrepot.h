@@ -61,7 +61,7 @@ class Entrepot{
                 return i;
             }
         }
-        return 0;
+        return arr.taille()-1;
     }
 
     int partition(Tableau<Entrepot>& arr, int low, int high) {
