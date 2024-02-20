@@ -33,9 +33,11 @@ istream& operator>>(istream& is, Tableau<Entrepot>& entrepots)
     return is;
 }
 
-Entrepot::Entrepot(float _x, float _y, int _numberBoxes, int _id) : numberBoxes(_numberBoxes), longitude(_x), latitude(_y), id(_id){
+Entrepot::Entrepot(double _x, double _y, int _numberBoxes, int _id)
+        : numberBoxes(_numberBoxes), id(_id), longitude(_x), latitude(_y) {
 
 }
 
-Entrepot::Entrepot(const Entrepot& other) : numberBoxes(other.numberBoxes), id(other.id), distance(other.distance), longitude(other.longitude), latitude(other.latitude) {
+Entrepot::Entrepot(const Entrepot& other)
+        : numberBoxes(other.numberBoxes), id(other.id), longitude(other.longitude), latitude(other.latitude), distance(other.distance) {
 }

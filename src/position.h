@@ -1,5 +1,5 @@
-/*  INF3105 - Structures de données et algorithmes       *
- *  UQAM / Département d'informatique                    *
+/*  INF3105 - Structures de donnï¿½es et algorithmes       *
+ *  UQAM / Dï¿½partement d'informatique                    *
  *  TP1                                                  */
 
 #if !defined(_POSITION__H_)
@@ -7,21 +7,20 @@
 
 #include <iostream>
 
-// Cette classe représente un point sur la surface de la Terre.
+// Cette classe reprï¿½sente un point sur la surface de la Terre.
 class Position{
-  public:
+public:
     Position(){}
     Position(double latitude_, double longitude_);
     Position(const Position&);
 
     double distance(const Position&) const;
 
-  private:
+private:
     double latitude;
     double longitude;
 
-  friend std::ostream& operator << (std::ostream&, const Position&);
-  friend std::istream& operator >> (std::istream&, Position&);
+    friend std::ostream& operator << (std::ostream&, const Position&);
+    friend std::istream& operator >> (std::istream&, Position&);
 };
 #endif
-

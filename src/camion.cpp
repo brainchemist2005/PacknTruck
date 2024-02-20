@@ -4,7 +4,7 @@
 
 #include "camion.h"
 
-Camion::Camion(float _x, float _y, int _param1, int _param2): longitude(_x), latitude(_y)  {
+Camion::Camion(double _x, double _y, int _param1, int _param2): longitude(_x), latitude(_y)  {
 
 }
 

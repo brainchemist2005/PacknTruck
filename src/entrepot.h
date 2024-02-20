@@ -15,28 +15,28 @@ using namespace std;
 class Entrepot{
   public:
     // Interface publique ici
-    Entrepot(float x=0, float y=0, int numberBoxes=0,int id=0);
+    Entrepot(double x=0, double y=0, int numberBoxes=0,int id=0);
     Entrepot(const Entrepot&);
 
     int numberBoxes,id;
-    float longitude,latitude,distance;
+    double longitude,latitude,distance;
 
-    float getLatitude() const
+    double getLatitude() const
     {
         return latitude;
     }
 
-    float getLongitude() const
+    double getLongitude() const
     {
         return longitude;
     }
 
-    void setLatitude(float lat)
+    void setLatitude(double lat)
     {
         this->latitude = lat;
     }
 
-    void setLongitude(float longi)
+    void setLongitude(double longi)
     {
         this->longitude = longi;
     }
@@ -94,10 +94,19 @@ class Entrepot{
         }
     }
 
+    void bubbleSort(Tableau<Entrepot>& arr, int n) {
+        for (int i = 0; i < n-1; i++) {
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j].distance > arr[j+1].distance) {
+                    swap(arr[j], arr[j+1]);
+                }
+            }
+        }
+    }
+
 
 private:
     // Représentation ici.
-    //float longitude,latitude; for now
 
   friend ostream& operator << (ostream& os, const Entrepot& entrepot);
   friend istream& operator >> (istream& is, Tableau<Entrepot>& entrepots);

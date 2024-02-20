@@ -14,7 +14,7 @@ using namespace std;
 // Représente un camion
 class Camion{
   public:
-    Camion(float x=0, float y=0, int capacity=0, int numberBoxesIn=0);
+    Camion(double x=0, double y=0, int capacity=0, int numberBoxesIn=0);
     Camion(const Camion&);
 
     // Interface publique ici.

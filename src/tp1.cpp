@@ -9,6 +9,7 @@
 #include <string>
 #include "entrepot.h"
 #include "camion.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -55,6 +56,8 @@ int main(int argc, const char** argv)
     	}
 }
 
+
+
 int tp1(istream& camion_entrepot){
     Tableau<Entrepot> entrepots;
 	Camion camion;
@@ -81,8 +84,19 @@ int tp1(istream& camion_entrepot){
     int pickedUp = entrepot.pickUpEntrepot(entrepots,camion.getCapacity());
 
     for (int i = 0; i <= pickedUp; ++i) {
-        std::cout << "Distance:" << entrepots[i].distance << "\t\tNumber of boxes: " << entrepots[i].numberBoxes << "\t\tPosition: ("
-                   << entrepots[i].getLongitude() << ", " << entrepots[i].getLatitude() << ")" << std::endl;
+        std::cout << "Distance:" << std::setw(15) << std::left << entrepots[i].distance << "Number of boxes: "  << entrepots[i].numberBoxes
+                  << "\tPosition: (" << entrepots[i].getLongitude() << ", " << entrepots[i].getLatitude() << ")" << std::endl;
+    }
+
+    std::ofstream outputFile("res+.txt");
+    if (outputFile.is_open()) {
+        for (int i = 0; i <= pickedUp; ++i) {
+            outputFile << "Distance:" << std::setw(15) << std::left << entrepots[i].distance << "Number of boxes: " << entrepots[i].numberBoxes
+                       << "\tPosition: (" << entrepots[i].getLongitude() << ", " << entrepots[i].getLatitude() << ")" << std::endl;
+        }
+        outputFile.close();
+    } else {
+        std::cout << "Erreur de fichier" << std::endl;
     }
 
     return 0;
