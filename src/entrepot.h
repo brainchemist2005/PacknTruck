@@ -94,17 +94,10 @@ class Entrepot{
         }
     }
 
-    void bubbleSort(Tableau<Entrepot>& arr, int n) {
-        for (int i = 0; i < n-1; i++) {
-            for (int j = 0; j < n-i-1; j++) {
-                if (arr[j].distance > arr[j+1].distance) {
-                    swap(arr[j], arr[j+1]);
-                }
-            }
-        }
+
+    bool operator> (const Entrepot& other) const {
+        return this->distance > other.distance;
     }
-
-
 private:
     // Représentation ici.
 

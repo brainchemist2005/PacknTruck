@@ -20,6 +20,10 @@ int tp1(std::istream& entree);
 // exemple: ./tp1 entrepot.txt
 // argv[0]="./tp1"; argv[1]="entrepot.txt"
 
+void writeTofile(Tableau<Entrepot> &entrepots, const Camion &camion, Entrepot &entrepot);
+
+void gettingDistance(const Tableau<Entrepot> &entrepots, const Position &position, double result);
+
 Position referencePosition;
 
 bool compareEntrepotDistance(const Entrepot& e1, const Entrepot& e2) {
@@ -56,6 +60,16 @@ int main(int argc, const char** argv)
     	}
 }
 
+void gettingDistance( Tableau<Entrepot> &entrepots, const Position &position, double result) {
+    for (int i = 0; i < entrepots.taille(); ++i) {
+        Position position1(entrepots[i].longitude, entrepots[i].latitude);
+
+        result = position.distance(position1);
+
+        entrepots[i].distance = result;
+
+    }
+}
 
 
 int tp1(istream& camion_entrepot){
@@ -67,37 +81,39 @@ int tp1(istream& camion_entrepot){
     camion.truckPosition(entrepots,camion);
     Position position(camion.getLongitude(), camion.getLatitude());
 
-    double result;
+    double result = 0;
 
     std::cout << camion << std::endl;
-    for (int i = 0; i < entrepots.taille(); ++i) {
-        Position position1(entrepots[i].longitude, entrepots[i].latitude);
+    gettingDistance(entrepots, position, result);
 
-        result = position.distance(position1);
+    //entrepot.quickSort(entrepots, 0, entrepots.taille()-1); //Algorithme de tri efficace
+    entrepots.bubbleSort(); //ALgorithme de tri non efficace
 
-        entrepots[i].distance = result;
-
-    }
-
-    entrepot.quickSort(entrepots, 0, entrepots.taille()-1);
-
-    int pickedUp = entrepot.pickUpEntrepot(entrepots,camion.getCapacity());
-
-    for (int i = 0; i <= pickedUp; ++i) {
-        std::cout << "Distance:" << std::setw(15) << std::left << entrepots[i].distance << "Number of boxes: "  << entrepots[i].numberBoxes
-                  << "\tPosition: (" << entrepots[i].getLongitude() << ", " << entrepots[i].getLatitude() << ")" << std::endl;
-    }
-
-    std::ofstream outputFile("res+.txt");
-    if (outputFile.is_open()) {
-        for (int i = 0; i <= pickedUp; ++i) {
-            outputFile << "Distance:" << std::setw(15) << std::left << entrepots[i].distance << "Number of boxes: " << entrepots[i].numberBoxes
-                       << "\tPosition: (" << entrepots[i].getLongitude() << ", " << entrepots[i].getLatitude() << ")" << std::endl;
-        }
-        outputFile.close();
-    } else {
-        std::cout << "Erreur de fichier" << std::endl;
-    }
+    writeTofile(entrepots, camion, entrepot);
 
     return 0;
 }
+
+
+
+void writeTofile(Tableau<Entrepot> &entrepots, const Camion &camion, Entrepot &entrepot) {
+    int pickedUp = entrepot.pickUpEntrepot(entrepots, camion.getCapacity());
+
+    for (int i = 0; i <= pickedUp; ++i) {
+        cout << "Distance:" << setw(15) << left << entrepots[i].distance << "Number of boxes: "  << entrepots[i].numberBoxes
+                  << "\tPosition: (" << entrepots[i].getLongitude() << ", " << entrepots[i].getLatitude() << ")" << endl;
+    }
+
+    ofstream outputFile("res+.txt");
+    outputFile << camion << endl;
+    if (outputFile.is_open()) {
+        for (int i = 0; i <= pickedUp; ++i) {
+            outputFile << "Distance:" << setw(15) << left << entrepots[i].distance << "Number of boxes: " << entrepots[i].numberBoxes
+                       << "\tPosition: (" << entrepots[i].getLongitude() << ", " << entrepots[i].getLatitude() << ")" << endl;
+        }
+        outputFile.close();
+    } else {
+        cout << "Erreur de fichier" << endl;
+    }
+}
+

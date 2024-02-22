@@ -11,6 +11,7 @@
 
 #include <assert.h>
 #include <functional>
+#include "entrepot.h"
 
 template <class T>
 class Tableau{
@@ -44,11 +45,15 @@ class Tableau{
     bool           operator == (const Tableau<T>& autre) const;
     Tableau<T>&    operator = (const Tableau<T>& autre);
 
-  private:
+    void bubbleSort();
+
+private:
     T*             elements;
     int            nbElements;
     int            capacite;
+
 };
+
 
 
 // ---------- Définitions -------------
@@ -132,6 +137,22 @@ int Tableau<T>::chercher(const T& element)
 
 
 template <class T>
+void Tableau<T>::bubbleSort() {
+    int n = this->taille();
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            // Assuming T has a defined comparison operator for >
+            if (this->elements[j] > this->elements[j+1]) {
+                T temp = this->elements[j];
+                this->elements[j] = this->elements[j+1];
+                this->elements[j+1] = temp;
+            }
+        }
+    }
+}
+
+
+template <class T>
 void Tableau<T>::vider()
 {
     nbElements = 0;
@@ -169,6 +190,7 @@ Tableau<T>& Tableau<T>::operator = (const Tableau<T>& autre)
     }
     return *this;
 }
+
 
 template <class T>
 bool Tableau<T>::operator == (const Tableau<T>& autre) const
